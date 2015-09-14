@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "user")
 public class User {
-    public static final String USER = "user"
+    public static final String USERNAME = "username"
     public static final String PASSWORD = "password"
     public static final String NAME = "name"
     public static final String MAIL = "mail"
@@ -17,14 +17,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id
 
-    @NotNull
-    private String user
+
+    private String username
     private String password
     private String name
     private String mail
 
-    public User(String user, String password, String name, String mail) {
-        this.user = user
+    public User(String username, String password, String name, String mail) {
+        this.username = username
         this.name = name
         this.mail = mail
         this.password = password
@@ -37,8 +37,8 @@ public class User {
         this.name = name
     }
 
-    void setUser(String user) {
-        this.user = user
+    void setUsername(String username) {
+        this.username = username
     }
 
     public void setPassword(String password) {
@@ -57,8 +57,8 @@ public class User {
         return name
     }
 
-    String getUser() {
-        return user
+    String getUsername() {
+        return username
     }
 
     public String getPassword() {

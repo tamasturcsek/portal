@@ -1,6 +1,6 @@
 package org.test;
 
-import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Theme
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
@@ -18,7 +18,7 @@ public class PortalUI extends UI {
     private BeanFieldGroup<User> fg = new BeanFieldGroup<>(User.class);
 
     private Label regLabel = new Label("Registration")
-    @PropertyId(User.USER)
+    @PropertyId(User.USERNAME)
     private TextField userRegField = new TextField("User")
     @PropertyId(User.PASSWORD)
     private PasswordField passwordRegField = new PasswordField("Password")
@@ -57,10 +57,7 @@ public class PortalUI extends UI {
         contentPane.setComponentAlignment(fRegister, Alignment.MIDDLE_CENTER)
         fRegister.setSizeFull();
 
-        userRegField.setNullRepresentation("")
-        mailRegField.setNullRepresentation("")
-        passwordRegField.setNullRepresentation("")
-        nameRegField.setNullRepresentation("")
+
         btReg.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {
@@ -77,10 +74,14 @@ public class PortalUI extends UI {
         btLogin.addClickListener(new Button.ClickListener() {
             @Override
             void buttonClick(Button.ClickEvent clickEvent) {
-                List<User> u = repo.findByUserAndPassword(userLoginField.getValue(),passwordLoginField.getValue())
-                /*if(u.isEmpty()) {
-                    fLogin.addComponent(new Label("OK"))
-                }*/
+                System.out.println(userLoginField.getValue() + "ezvan")
+                def u = repo.findByUsernameAndPassword(userLoginField.getValue(),passwordLoginField.getValue())
+                if(u.isEmpty()) {
+                    fLogin.addComponent(new Label("NOTOK"))
+                }
+                else {
+                    fLogin.addComponent(new Label(("OK")))
+                }
             }
         })
 
@@ -92,6 +93,10 @@ public class PortalUI extends UI {
         refresh();
         setContent(contentPane);
         getPage().setTitle("Portal")
+        userRegField.setNullRepresentation("")
+        mailRegField.setNullRepresentation("")
+        passwordRegField.setNullRepresentation("")
+        nameRegField.setNullRepresentation("")
     }
 
     private Table buildUserTable() {
